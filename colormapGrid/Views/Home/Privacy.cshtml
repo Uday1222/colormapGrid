@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Grid Count Visualization";
+    var countGrid = ViewBag.CountGrid as int[,];
+    int numCellsX = ViewBag.NumCellsX;
+    int numCellsY = ViewBag.NumCellsY;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(@numCellsX, 1fr);
+            grid-template-rows: repeat(@numCellsY, 1fr);
+            gap: 1px;
+            width: 100%;
+            max-width: 415px;
+            height: 510px;
+            border: 1px solid #000;
+        }
+
+        .cell {
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <div class="grid">
+            @for (int y = 0; y < numCellsY; y++)
+            {
+                for (int x = 0; x < numCellsX; x++)
+                {
+                    <div class="cell">
+                        @countGrid[x, y]
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>

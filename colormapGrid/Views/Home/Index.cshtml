@@ -1,0 +1,60 @@
+﻿@model List<dynamic>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Chart with Counts Only</title>
+    <style>
+        /* Styling the grid table */
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            width: 80%;
+        }
+
+        td {
+            border: 1px solid #000;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .x-label, .y-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align:center;">Grid Chart with Counts Only</h2>
+
+    <!-- Create a table for the grid -->
+    <table>
+        <tr>
+            @* <th></th>
+            @for (int x = 1; x <= 10; x++)
+            {
+                <th class="x-label">Col @x</th>
+            } *@
+        </tr>
+        @for (int y = 10; y >= 1; y--)
+        {
+            <tr>
+                @* <td class="y-label">Row @y</td> *@
+                @for (int x = 1; x <= 10; x++)
+                {
+                    var cell = Model.FirstOrDefault(d => d.X == x && d.Y == y);
+                    <td>
+                        @(cell != null ? cell.Count.ToString() : "")
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+
+</body>
+</html>
